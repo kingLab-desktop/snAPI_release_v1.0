@@ -140,29 +140,6 @@ if __name__ == "__main__":
 #         plt.title("Counts / Time")
 #         plt.pause(1000)
 
-####### ===== Slack Notification ===== ######
-    import requests
-    import json
-    import sys
-
-    SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
-
-    def send_slack_message(message_text):
-        slack_message = {
-            'text': message_text
-        }
-    
-        try:
-            response = requests.post(
-                SLACK_WEBHOOK_URL,
-                data=json.dumps(slack_message),
-                headers={'Content-Type': 'application/json'}
-            )
-            response.raise_for_status()
-            print("Notification sent to Slack successfully!")
-        except requests.exceptions.RequestException as e:
-            print(f"Failed to send Slack notification: {e}")
-
     if __name__ == "__main__":
         # Example usage: wrap your main script logic or call this function at the end
         try:
@@ -170,11 +147,9 @@ if __name__ == "__main__":
             print("Script is running...")
             # ... some long-running task ...
             print("Script finished successfully.")
-            send_slack_message("Your Python script has finished running successfully.")
         
         except Exception as e:
             error_message = f"An error occurred: {e}"
             print(error_message)
-            send_slack_message(f"Your Python script encountered an error: {error_message}")
             # Re-raise the exception if needed
             # raise       
